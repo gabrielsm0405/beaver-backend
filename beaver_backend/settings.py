@@ -26,6 +26,7 @@ SECRET_KEY = 'django-insecure-gq#+^84$b%0$pw5a7!f-0jkms@+mypu+w6(30*+2+_yp@kg@=%
 DEBUG = True
 
 ALLOWED_HOSTS = ["ec2-3-14-141-233.us-east-2.compute.amazonaws.com"]
+#ALLOWED_HOSTS = ["localhost"]
 
 CORS_ORIGIN_ALLOW_ALL = True
 

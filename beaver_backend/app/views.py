@@ -45,7 +45,7 @@ class get_neighborhood_data(mixins.CreateModelMixin, viewsets.GenericViewSet):
                         "cashbackPercentage": "15",
                         "cashbackValue": "{:.2f}".format((float(home_data["formattedPrice"].split("R$")[1]) + get_transport_data(neighborhood)["uber"]) * 15/100),
                         "link1": "https://quintoandar.com.br/alugar/imovel/"+f"{neighborhood}-recife-pe-brasil/"+f"de-500-a-{maxPrice}-aluguel",
-                        "link2": "https://www.uber.com/br/pt-br/"
+                        "link2": "https://www.uber.com/global/pt-br/price-estimate/"
                     },
                     {
                         "data": {
@@ -106,6 +106,19 @@ class get_neighborhood_data(mixins.CreateModelMixin, viewsets.GenericViewSet):
             # for neighborhood_data in neighborhoods_data:
             #     neighborhood_data["cashbackValue"] = "{:.2f}".format(float(neighborhood_data["totalPrice"]) * (float(neighborhood_data["cashbackPercentage"])/100))
 
+            neighborhoods_data.sort(key=sort_fun)
+
+            # def filter_fun(e):
+            #     if float(e["totalPrice"]) <= float(maxPrice):
+            #         return True
+            #     else:
+            #         return False
+
+            # neighborhoods_data = filter(filter_fun, neighborhoods_data)
+
             return HttpResponse(content=json.dumps(neighborhoods_data, ensure_ascii=False).encode('utf8'), status=200)
         else:
             return HttpResponse(content=json.dumps({'error':"Bairro não especificado"}, ensure_ascii=False).encode('utf8'), status=400)
+
+def sort_fun(e):
+    return e["totalPrice"]
