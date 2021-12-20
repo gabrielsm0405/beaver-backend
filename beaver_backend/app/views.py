@@ -43,7 +43,7 @@ class get_neighborhood_data(mixins.CreateModelMixin, viewsets.GenericViewSet):
                         },
                         "totalPrice": str(float(home_data["formattedPrice"].split("R$")[1]) + get_transport_data(neighborhood)["uber"]),
                         "cashbackPercentage": "15",
-                        "cashbackValue": "{:.2f}".format(float(home_data["formattedPrice"].split("R$")[1]) + get_transport_data(neighborhood)["uber"] * 15/100),
+                        "cashbackValue": "{:.2f}".format((float(home_data["formattedPrice"].split("R$")[1]) + get_transport_data(neighborhood)["uber"]) * 15/100),
                         "link1": "https://quintoandar.com.br/alugar/imovel/"+f"{neighborhood}-recife-pe-brasil/"+f"de-500-a-{maxPrice}-aluguel",
                         "link2": "https://www.uber.com/br/pt-br/"
                     },
@@ -64,7 +64,7 @@ class get_neighborhood_data(mixins.CreateModelMixin, viewsets.GenericViewSet):
                         },
                         "totalPrice": str(float(home_data["formattedPrice"].split("R$")[1]) + get_transport_data(neighborhood)["bus_average"]),
                         "cashbackPercentage": "15",
-                        "cashbackValue": "{:.2f}".format(float(home_data["formattedPrice"].split("R$")[1]) + get_transport_data(neighborhood)["bus_average"] * 15/100),
+                        "cashbackValue": "{:.2f}".format((float(home_data["formattedPrice"].split("R$")[1]) + get_transport_data(neighborhood)["bus_average"]) * 15/100),
                         "link1": "https://quintoandar.com.br/alugar/imovel/"+f"{neighborhood}-recife-pe-brasil/"+f"de-500-a-{maxPrice}-aluguel",
                         "link2": ""
                     }
