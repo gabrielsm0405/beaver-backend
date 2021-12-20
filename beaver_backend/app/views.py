@@ -106,8 +106,6 @@ class get_neighborhood_data(mixins.CreateModelMixin, viewsets.GenericViewSet):
             # for neighborhood_data in neighborhoods_data:
             #     neighborhood_data["cashbackValue"] = "{:.2f}".format(float(neighborhood_data["totalPrice"]) * (float(neighborhood_data["cashbackPercentage"])/100))
 
-            neighborhoods_data.sort(key=sort_fun)
-
             def filter_fun(e):
                 if float(e["totalPrice"]) <= float(maxPrice):
                     return True
@@ -115,6 +113,8 @@ class get_neighborhood_data(mixins.CreateModelMixin, viewsets.GenericViewSet):
                     return False
 
             neighborhoods_data = list(filter(filter_fun, neighborhoods_data))
+
+            neighborhoods_data.sort(key=sort_fun)
 
             return HttpResponse(content=json.dumps(neighborhoods_data, ensure_ascii=False).encode('utf8'), status=200)
         else:
