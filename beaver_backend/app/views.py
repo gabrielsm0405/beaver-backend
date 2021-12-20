@@ -108,13 +108,13 @@ class get_neighborhood_data(mixins.CreateModelMixin, viewsets.GenericViewSet):
 
             neighborhoods_data.sort(key=sort_fun)
 
-            # def filter_fun(e):
-            #     if float(e["totalPrice"]) <= float(maxPrice):
-            #         return True
-            #     else:
-            #         return False
+            def filter_fun(e):
+                if float(e["totalPrice"]) <= float(maxPrice):
+                    return True
+                else:
+                    return False
 
-            # neighborhoods_data = filter(filter_fun, neighborhoods_data)
+            neighborhoods_data = list(filter(filter_fun, neighborhoods_data))
 
             return HttpResponse(content=json.dumps(neighborhoods_data, ensure_ascii=False).encode('utf8'), status=200)
         else:
